@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        span {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #currentDate {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #daysBetweenDates1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #daysLeftToUni {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #percentageCompleted {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>University Countdown</h1>
+
+    <p>Start Date: <b>2023-09-01</b></p>
+    <p>End Date: <b>2027-05-31</b></p>
+    <p>Current Date: <span id="currentDate">Calculating...</span></p>
+
+    <p>Total days of university: <span id="daysBetweenDates1">Calculating...</span> days</p>
+    <p>Days left to university: <span id="daysLeftToUni">Calculating...</span> days</p>
+    <p>Percentage of university completed: <span id="percentageCompleted">Calculating...</span></p>
+
+    <script>
+        // JavaScript code to calculate and display the values
+        document.addEventListener("DOMContentLoaded", function () {
+            var startDate = new Date(2023, 8, 1);  // Note: JavaScript months are zero-based
+            var endDate1 = new Date(2027, 4, 31);
+            var currentDate = new Date();
+            var currentDateElement = document.getElementById("currentDate");
+            
+            currentDateElement.innerText = formatDate(currentDate);
+            
+            var daysBetweenDates1 = Math.floor((endDate1 - startDate) / (1000 * 60 * 60 * 24));
+            var daysLeftToUni = Math.floor((endDate1 - currentDate) / (1000 * 60 * 60 * 24));
+            var percentageCompleted = ((daysBetweenDates1 - daysLeftToUni) / daysBetweenDates1) * 100;
+
+            document.getElementById("daysBetweenDates1").innerText = daysBetweenDates1;
+            document.getElementById("daysLeftToUni").innerText = daysLeftToUni;
+            document.getElementById("percentageCompleted").innerText = percentageCompleted.toFixed(2) + "%";
+        });
+        
+        function formatDate(date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1; // Months are zero-based
+            var year = date.getFullYear();
+
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+
+            return year + "-" + month + "-" + day;
+        }
+    </script>
+</body>
+</html>
